@@ -2,6 +2,7 @@ import logo from "./logo.svg";
 import "./App.css";
 import { ListContainer } from "./components/ListContainer";
 import { useEffect, useState } from "react";
+import { InputContainer } from "./components/InputContainer";
 
 function App() {
   const [students, setStudents] = useState([]);
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <div className="App w-50 mx-auto mt-5">
+      <InputContainer/>
       <ListContainer students={students}/>
     </div>
   );
