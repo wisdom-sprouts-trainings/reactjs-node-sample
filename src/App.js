@@ -27,6 +27,26 @@ function App() {
     }
   }
 
+  async function addStudent(student) {
+    try {
+      const response = await fetch("http://localhost:3011/api/student", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(student)
+      });
+
+      const studentResponse = await response.json();
+
+      fetchStudents();
+      
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchStudents();
   }, []);
@@ -34,7 +54,7 @@ function App() {
 
   return (
     <div className="App w-50 mx-auto">
-      <InputContainer/>
+      <InputContainer addStudentHandler={addStudent}/>
       <ListContainer students = {students}/>
     </div>
   );

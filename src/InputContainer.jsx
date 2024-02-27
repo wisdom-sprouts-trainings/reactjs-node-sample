@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
-export const InputContainer = () => {
+export const InputContainer = ({addStudentHandler}) => {
   const [student, setStudent] = useState({ name: "", email: "", mobile: 0 });
+
+  function studentSaveHandler() {
+    addStudentHandler(student);
+    setStudent({ name: "", email: "", mobile: 0 });
+  }
 
   function setNameHandler(e) {
     setStudent((previousStudent) => {
@@ -63,7 +68,7 @@ export const InputContainer = () => {
         />
       </div>
 
-      <button className="btn btn-primary">Save</button>
+      <button className="btn btn-primary" onClick={studentSaveHandler}>Save</button>
     </div>
   );
 };
