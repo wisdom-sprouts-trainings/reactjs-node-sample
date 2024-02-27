@@ -22,13 +22,31 @@ function App() {
     setStudents(studentResponse);
   }
 
+  async function addStudentHandler(newStudent) {
+    try {
+      const response = await fetch("http://localhost:3011/api/student", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newStudent),
+      });
+
+      const studentResponse = await response.json();
+
+      fetchStudents();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     fetchStudents();
   }, []);
 
   return (
     <div className="App w-50 mx-auto mt-5">
-      <InputContainer/>
+      <InputContainer addStudentHandlerFunction={addStudentHandler}/>
       <ListContainer students={students}/>
     </div>
   );
