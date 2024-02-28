@@ -1,13 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
-import { ListContainer } from './ListContainer';
-import { useState, useEffect } from 'react';
-import { InputContainer } from './InputContainer';
+import logo from "./logo.svg";
+import "./App.css";
+import { ListContainer } from "./ListContainer";
+import { useEffect, useState } from "react";
 
 function App() {
 
   const [students, setStudents] = useState([]);
-
   async function fetchStudents() {
     try {
       const response = await fetch("http://localhost:3011/api/student", {
@@ -22,25 +20,6 @@ function App() {
       console.log(studentResponse);
 
       setStudents(studentResponse);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function addStudent(student) {
-    try {
-      const response = await fetch("http://localhost:3011/api/student", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(student)
-      });
-
-      const studentResponse = await response.json();
-
-      fetchStudents();
-      
 
     } catch (error) {
       console.log(error);
@@ -51,11 +30,9 @@ function App() {
     fetchStudents();
   }, []);
 
-
   return (
     <div className="App w-50 mx-auto">
-      <InputContainer addStudentHandler={addStudent}/>
-      <ListContainer students = {students}/>
+      <ListContainer students={students}/>
     </div>
   );
 }
